@@ -12,12 +12,9 @@ function UiChat() {
         <Main />
       </main>
       <menu>
-        <p>hassan</p>
-      </menu>
-      <sidebar>
         <SearchAppBar />
         <MenuChat />
-      </sidebar>
+      </menu>
     </>
   );
 }

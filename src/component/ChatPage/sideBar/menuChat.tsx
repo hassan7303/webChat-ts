@@ -1,8 +1,8 @@
 import Avatar from "@mui/material/Avatar";
 import EditIcon from "@mui/icons-material/Edit";
+import * as React from "react";
 import Fab from "@mui/material/Fab";
-import PropTypes from "prop-types";
-// import SwipeableViews from "react-swipeable-views";
+// import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
@@ -10,47 +10,47 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-function MenuChate() {
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+interface TabPanelProps {
+  children?: React.ReactNode;
+  dir?: any;
+  index: number;
+  value: number;
+}
 
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`full-width-tabpanel-${index}`}
-        aria-labelledby={`full-width-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
 
-  TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index: number) {
+  return {
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
   };
-
-  function a11yProps(index) {
-    return {
-      id: `full-width-tab-${index}`,
-      "aria-controls": `full-width-tabpanel-${index}`,
-    };
-  }
+}
+function MenuChat() {
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
-  // const handleChangeIndex = (index) => {
+  // const handleChangeIndex = (index: number) => {
   //   setValue(index);
   // };
 
@@ -79,12 +79,7 @@ function MenuChate() {
         index={value}
         onChangeIndex={handleChangeIndex}
       > */}
-          <TabPanel
-            className="scrol_menu"
-            value={value}
-            index={0}
-            dir={!theme.direction}
-          >
+          <TabPanel value={value} index={0} dir={!theme.direction}>
             <div className="users_cadr">
               <div className="avatar_in_list_user">
                 <Avatar alt="ا" src="./header/girl-5.jpg" />
@@ -142,12 +137,7 @@ function MenuChate() {
               </div>
             </div>
           </TabPanel>
-          <TabPanel
-            className="scrol_menu"
-            value={value}
-            index={1}
-            dir={!theme.direction}
-          >
+          <TabPanel value={value} index={1} dir={!theme.direction}>
             <div className="users_cadr">
               <div className="avatar_in_list_user">
                 <Avatar alt="ا" src="./header/girl-5.jpg" />
@@ -177,12 +167,7 @@ function MenuChate() {
               </div>
             </div>
           </TabPanel>
-          <TabPanel
-            className="scrol_menu"
-            value={value}
-            index={2}
-            dir={!theme.direction}
-          >
+          <TabPanel value={value} index={2} dir={!theme.direction}>
             <div className="users_cadr">
               <div className="avatar_in_list_user">
                 <Avatar alt="گ" src="./header/girl-5.jpg" />
@@ -198,12 +183,7 @@ function MenuChate() {
               </div>
             </div>
           </TabPanel>
-          <TabPanel
-            className="scrol_menu"
-            value={value}
-            index={3}
-            dir={!theme.direction}
-          >
+          <TabPanel value={value} index={3} dir={!theme.direction}>
             <div className="users_cadr">
               <div className="avatar_in_list_user">
                 <Avatar alt="ک" src="./header/girl-5.jpg" />
@@ -232,4 +212,4 @@ function MenuChate() {
     </div>
   );
 }
-export default MenuChate;
+export default MenuChat;
