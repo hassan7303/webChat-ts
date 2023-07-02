@@ -9,23 +9,25 @@ import { useState, useRef } from "react";
 import { any, number, string } from "prop-types";
 import { Message } from "@mui/icons-material";
 function Main() {
-  interface setNewMessageTs {
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
-    target: EventTarget;
-    value: string;
-  }
-  interface setAllMessageTs {
-    allMessage: string[];
+  // interface setAllMessageTs {
+  //   allMessage: [];
+  //   id: number;
+  //   Message: string;
+  // }
+  interface Message {
     id: number;
-    Message: string;
+    message: string;
   }
-  const inputFile = useRef<any>(null);
-  const [allMessage, setAllMessage] = useState<setAllMessageTs[]>();
-  const [newMessage, setNewMessage] = useState<number | string>();
+  const inputFile = useRef<HTMLInputElement>(null);
+  const [allMessage, setAllMessage] = useState<Message[]>([]);
+  const [newMessage, setNewMessage] = useState<string>("");
   const onButtonClick = () => {
-    inputFile.current.click();
+    if (inputFile.current) {
+      inputFile.current.click();
+    }
   };
   let id = 0;
+
   const messageHandel = () => {
     setAllMessage([
       ...allMessage,

@@ -1,0 +1,196 @@
+.container_header {
+  grid-column: 2;
+  grid-row: 1;
+  height: 22.25vh;
+}
+.container_header header {
+  position: relative;
+}
+.header_name_user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.date_seen {
+  position: relative;
+  font-size: 11px;
+  margin: 0 !important;
+}
+.data_username_profill {
+  position: relative;
+  margin: 0 !important;
+}
+.container_chat_ui {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  grid-template-rows: 0vh 1fr;
+  width: auto;
+  height: 100vh;
+  overflow: hidden;
+}
+main {
+  grid-column: 2;
+  grid-row: 2;
+}
+menu {
+  background: blue;
+  display: none;
+}
+aside {
+  background: gold;
+  grid-column: 1;
+  grid-row: 1/-1;
+  height: 100vh;
+  z-index: 1000;
+}
+.icons {
+  width: 26px;
+  cursor: pointer;
+  height: 25px;
+  box-sizing: unset;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+.icons:hover {
+  border-radius: 57%;
+  background: #454545b8;
+}
+.icons_header {
+  position: fixed;
+  display: flex;
+  gap: 18px;
+  left: 25px;
+}
+.profile_information {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+  cursor: pointer;
+}
+.MuiPaper-root {
+  color: white !important;
+  z-index: 1000 !important;
+  background-color: #212121 !important;
+}
+.MuiToolbar-root {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+}
+.css-1orzy9s {
+  position: relative;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.15);
+  margin-left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.css-0 {
+  border-bottom: 2px solid #000000c9;
+}
+.css-0 button {
+  color: white;
+}
+.css-16lloyr-MuiBottomNavigation-root {
+  background: #212121 !important;
+}
+
+.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {
+  border-bottom: 2px solid !important;
+}
+.bg_main {
+  background-image: url("./main/a6291376290113f9a9cf20d505ae3936.jpg");
+  background-size: cover;
+  width: auto;
+  height: 100vh;
+  overflow: hidden;
+}
+.list_userNames_chat {
+  background: #212121;
+  color: white;
+  height: 100vh;
+}
+footer {
+  position: absolute;
+  bottom: 20px;
+}
+.main_body {
+  display: flex;
+  justify-content: center;
+  height: 87vh;
+  overflow: auto;
+}
+.users_cadr {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  position: relative;
+  border: 1px solid #212121;
+}
+.time_recently {
+  position: absolute;
+  left: 18px;
+}
+p {
+  margin: 0 !important;
+}
+.container_main {
+  width: 40vw;
+  color: white;
+  height: 77vh;
+  overflow: auto;
+  position: relative;
+  top: 4rem;
+}
+.message_send {
+  background: #1976d2;
+  width: fit-content;
+  padding: 7px;
+  border-radius: 11px;
+  position: relative;
+  margin-top: 5px;
+}
+.message_receive {
+  background: #212121;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 7px;
+  border-radius: 11px;
+  position: relative;
+  left: 0;
+  margin-top: 5px;
+}
+.container_message_receive {
+  display: flex;
+  justify-content: end;
+}
+.box_users {
+  background: #212121;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+.css-ancrnh-MuiButtonBase-root-MuiIconButton-root {
+  position: absolute !important;
+  right: 0 !important;
+}
+
+.muirtl-19kzrtu {
+  padding: 0.4rem !important;
+  background: #212121 !important;
+}
+.scrol_menu {
+  overflow: auto;
+  height: 100vh;
+}
+sidebar {
+  width: 400px;
+}
+.users_cadr:hover {
+  background: #1a1919;
+}
