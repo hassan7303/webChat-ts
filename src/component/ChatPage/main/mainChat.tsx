@@ -6,14 +6,20 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import { useState, useRef } from "react";
-import { any, number, string } from "prop-types";
-import { Message } from "@mui/icons-material";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+
 function Main() {
-  // interface setAllMessageTs {
-  //   allMessage: [];
-  //   id: number;
-  //   Message: string;
-  // }
+  const options = ["پاسخ", "کپی", "پین", "فروارد", "حذف"];
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   interface Message {
     id: number;
     message: string;
@@ -41,11 +47,26 @@ function Main() {
     <div className="bg_main">
       <div className="main_body" dir="rtl">
         <div className="container_main">
-          {/* {allMessage.map((messageObj) => (
+          {allMessage.map((messageObj, index) => (
             <div className="container_message_send">
-              <div className="message_send">{messageObj.message}</div>
+              <div className="message_send" kay={index}>
+                <div>
+                  <span onClick={handleClick}>{messageObj.message}</span>
+                  <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                    {options.map((option) => (
+                      <MenuItem
+                        key={option}
+                        selected={option === "Pyxis"}
+                        onClick={handleClose}
+                      >
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </div>
+              </div>
             </div>
-          ))} */}
+          ))}
 
           <div className="container_message_receive">
             <div className="message_receive">
