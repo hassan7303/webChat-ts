@@ -8,23 +8,47 @@ import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import { useState, useRef } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { string } from "prop-types";
 
 function Main() {
-  const options = ["پاسخ", "کپی", "پین", "فروارد", "حذف"];
+  const options: string[] = ["پاسخ", "کپی", "پین", "فروارد", "حذف"];
+
+  const handleClickOptions = (option: string) => {
+    switch (option) {
+      case "حذف":
+        console.log("حذف");
+        break;
+      case "فروارد":
+        console.log("فروارد");
+        break;
+      case "پین":
+        console.log("پین");
+        break;
+      case "پاسخ":
+        console.log("پاسخ");
+        break;
+      default:
+        console.log("کپی");
+    }
+    setAnchorEl(null);
+  };
+
+  options.map((option) => (
+    <div key={option} onClick={() => handleClickOptions(option)}>
+      {option}
+    </div>
+  ));
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+
   interface Message {
     id: string;
     message: string;
     date: string;
+    dateTime: string;
   }
   const fullDate = new Date();
 
@@ -34,6 +58,8 @@ function Main() {
     year: "numeric",
   };
   const persianDate = fullDate.toLocaleDateString("fa-IR", typeDate);
+  const hours = fullDate.getHours().toString().padStart(2, "0");
+  const minutes = fullDate.getMinutes().toString().padStart(2, "0");
   const inputFile = useRef<HTMLInputElement>(null);
   const [allMessage, setAllMessage] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
@@ -47,9 +73,10 @@ function Main() {
     setAllMessage([
       ...allMessage,
       {
-        id: "qwertyu" + Math.random,
+        id: "qwertyu" + Math.floor(Math.random() * 10000000) + 1,
         message: newMessage,
         date: persianDate,
+        dateTime: hours + ":" + minutes,
       },
     ]);
   };
@@ -61,13 +88,17 @@ function Main() {
             <div className="container_message_send">
               <div className="message_send">
                 <div>
-                  <span onClick={handleClick}>{messageObj.message}</span>
-                  <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                  <span onClick={handleClick}>{messageObj.id}</span>
+                  <Menu
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClickOptions}
+                  >
                     {options.map((option) => (
                       <MenuItem
                         key={option}
                         selected={option === "Pyxis"}
-                        onClick={handleClose}
+                        onClick={() => handleClickOptions(option)}
                       >
                         {option}
                       </MenuItem>
