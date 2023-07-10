@@ -10,46 +10,28 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 function Main() {
-  const options: string[] = ["پاسخ", "کپی", "پین", "فروارد", "حذف"];
-
-  const handleClickOptions = (option: string) => {
-    switch (option) {
-      case "حذف":
-        console.log("حذف");
-        break;
-      case "فروارد":
-        console.log("فروارد");
-        break;
-      case "پین":
-        console.log("پین");
-        break;
-      case "پاسخ":
-        console.log("پاسخ");
-        break;
-      default:
-        console.log("کپی");
-    }
-    setAnchorEl(null);
-  };
-
-  options.map((option) => (
-    <div key={option} onClick={() => handleClickOptions(option)}>
-      {option}
-    </div>
-  ));
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
   interface Message {
     id: string;
     message: string;
     date: string;
     dateTime: string;
   }
+  const options: string[] = ["پاسخ", "کپی", "پین", "فروارد", "حذف"];
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [currentMessageId, setCurrentMessageId] = useState<string>("");
+  const open = Boolean(anchorEl);
+  const handleClick = (
+    event: React.MouseEvent<HTMLSpanElement>,
+    messageId: string
+  ) => {
+    setAnchorEl(event.currentTarget);
+    setCurrentMessageId(messageId);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const fullDate = new Date();
 
   const typeDate: Intl.DateTimeFormatOptions = {
@@ -60,9 +42,11 @@ function Main() {
   const persianDate = fullDate.toLocaleDateString("fa-IR", typeDate);
   const hours = fullDate.getHours().toString().padStart(2, "0");
   const minutes = fullDate.getMinutes().toString().padStart(2, "0");
+
   const inputFile = useRef<HTMLInputElement>(null);
   const [allMessage, setAllMessage] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
+
   const onButtonClick = () => {
     if (inputFile.current) {
       inputFile.current.click();
@@ -80,25 +64,51 @@ function Main() {
       },
     ]);
   };
+
+  const deleteMessage = (id: string) => {
+    const updateMessage = allMessage.filter((message) => message.id !== id);
+    setAllMessage(updateMessage);
+  };
+
+  const handleClickOptions = (option: string, messageId: string) => {
+    switch (option) {
+      case "حذف":
+        deleteMessage(messageId);
+        break;
+      case "فروارد":
+        console.log("فروارد");
+        break;
+      case "پین":
+        console.log("پین");
+        break;
+      case "پاسخ":
+        console.log("پاسخ");
+        break;
+      default:
+        console.log("کپی");
+    }
+    setAnchorEl(null);
+  };
+
   return (
     <div className="bg_main">
       <div className="main_body" dir="rtl">
         <div className="container_main">
           {allMessage.map((messageObj) => (
-            <div className="container_message_send">
+            <div className="container_message_send" key={messageObj.id}>
               <div className="message_send">
                 <div>
-                  <span onClick={handleClick}>{messageObj.id}</span>
-                  <Menu
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClickOptions}
-                  >
+                  <span onClick={(event) => handleClick(event, messageObj.id)}>
+                    {messageObj.message}
+                  </span>
+                  <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
                     {options.map((option) => (
                       <MenuItem
                         key={option}
                         selected={option === "Pyxis"}
-                        onClick={() => handleClickOptions(option)}
+                        onClick={() =>
+                          handleClickOptions(option, currentMessageId)
+                        }
                       >
                         {option}
                       </MenuItem>
