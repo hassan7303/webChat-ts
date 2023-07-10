@@ -8,6 +8,7 @@ import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import { useState, useRef } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { string } from "prop-types";
 
 function Main() {
   const options = ["پاسخ", "کپی", "پین", "فروارد", "حذف"];
@@ -21,9 +22,18 @@ function Main() {
     setAnchorEl(null);
   };
   interface Message {
-    id: number;
+    id: string;
     message: string;
+    date: string;
   }
+  const fullDate = new Date();
+
+  const typeDate: Intl.DateTimeFormatOptions = {
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+  };
+  const persianDate = fullDate.toLocaleDateString("fa-IR", typeDate);
   const inputFile = useRef<HTMLInputElement>(null);
   const [allMessage, setAllMessage] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
@@ -32,14 +42,14 @@ function Main() {
       inputFile.current.click();
     }
   };
-  let id = 0;
 
   const messageHandel = () => {
     setAllMessage([
       ...allMessage,
       {
-        id: id++,
+        id: "qwertyu" + Math.random,
         message: newMessage,
+        date: persianDate,
       },
     ]);
   };
@@ -47,9 +57,9 @@ function Main() {
     <div className="bg_main">
       <div className="main_body" dir="rtl">
         <div className="container_main">
-          {allMessage.map((messageObj, index) => (
+          {allMessage.map((messageObj) => (
             <div className="container_message_send">
-              <div className="message_send" kay={index}>
+              <div className="message_send">
                 <div>
                   <span onClick={handleClick}>{messageObj.message}</span>
                   <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
