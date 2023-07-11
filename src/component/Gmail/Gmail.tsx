@@ -1,13 +1,13 @@
 import axios from "axios";
-import { any, string } from "prop-types";
 import { useParams } from "react-router-dom";
 export function Gmail() {
   const { code } = useParams();
-  async function sendTocen() {
-    const res = await axios.get("", { code });
+  async function sendToken() {
+    const res = await axios.get(`https://?code=${code}`);
     console.log(res);
+    localStorage.setItem("code", code);
   }
-  sendTocen();
+  sendToken();
   return (
     <>
       <div style={{ background: "black" }}></div>
